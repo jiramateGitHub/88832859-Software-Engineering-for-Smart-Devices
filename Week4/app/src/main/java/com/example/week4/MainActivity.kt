@@ -17,4 +17,20 @@ class MainActivity : AppCompatActivity() {
         transaction.commit();
 
     }
+
+    override fun onBackPressed() {
+
+        val manager = supportFragmentManager.findFragmentById(R.id.contentContainer)
+
+        if (manager is fragment_first ) {
+
+            finish()
+
+        }
+        else{
+            super.onBackPressed();
+        }
+
+    }
+
 }
