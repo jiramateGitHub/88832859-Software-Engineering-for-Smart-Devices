@@ -1,7 +1,8 @@
-package com.example.week3
+package com.example.week4_hw
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 
 class MainActivity : AppCompatActivity() {
 

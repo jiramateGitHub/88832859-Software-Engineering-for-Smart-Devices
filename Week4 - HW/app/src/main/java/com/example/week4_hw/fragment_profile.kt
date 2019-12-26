@@ -1,4 +1,4 @@
-package com.example.week3
+package com.example.week4_hw
 
 
 import android.os.Bundle
@@ -6,12 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 
-/**
- * A simple [Fragment] subclass.
- */
 class fragment_profile : Fragment() {
     private var username : String? = null
     private var password : String? = null
