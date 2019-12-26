@@ -11,9 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     private var username : EditText ? = null
     private var password : EditText ? = null
-    private var login : Button ? = null
-    private var signup : Button ? = null
-    private var facebook : Button ? = null
+    private var signin : Button ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,22 +22,20 @@ class MainActivity : AppCompatActivity() {
 
         }
         setInitView()
-        login!!.setOnClickListener{
-            Toast.makeText(applicationContext,username!!.text.toString(),Toast.LENGTH_SHORT).show()
+        signin!!.setOnClickListener{
+            Toast.makeText(applicationContext,"Welcome " + username!!.text.toString(),Toast.LENGTH_SHORT).show()
             val intent = Intent(this, Main2Activity::class.java)
-            intent.putExtra("username",username.toString())
+            intent.putExtra("username",username!!.text.toString())
+            intent.putExtra("password",password!!.text.toString())
             startActivity(intent)
         }
 
     }
 
-
     private fun setInitView() {
         username = findViewById<EditText>(R.id.editUsername)
         password = findViewById<EditText>(R.id.editPassword)
-        login = findViewById<Button>(R.id.btnLogin)
-        signup = findViewById<Button>(R.id.btnSignup)
-        facebook = findViewById<Button>(R.id.btnFb)
+        signin = findViewById<Button>(R.id.signin)
     }
 
 
