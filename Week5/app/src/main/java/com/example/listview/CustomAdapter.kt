@@ -60,4 +60,12 @@ class CustomAdapter(context: Context, val dataSource: JSONArray) : BaseAdapter()
         return view
     }
 
+    private class ViewHolder {
+
+        lateinit var titleTextView: TextView
+        lateinit var detailTextView: TextView
+
+    }
+
+
 }
