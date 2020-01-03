@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.TextView
+import android.widget.*
+import com.bumptech.glide.Glide
 import org.json.JSONArray
 
 class CustomAdapter(context: Context, val dataSource: JSONArray) : BaseAdapter() {
@@ -39,9 +39,11 @@ class CustomAdapter(context: Context, val dataSource: JSONArray) : BaseAdapter()
 
             // 3
             holder = ViewHolder()
+
+            holder.layout = view.findViewById(R.id.listview_layout)
             holder.titleTextView = view.findViewById(R.id.tv_name) as TextView
             holder.detailTextView = view.findViewById(R.id.tv_description) as TextView
-
+            holder.image = view.findViewById(R.id.imgV) as ImageView
             // 4
             view.tag = holder
         } else {
@@ -51,21 +53,30 @@ class CustomAdapter(context: Context, val dataSource: JSONArray) : BaseAdapter()
         }
 
         // 6
+        val layout = holder.layout
         val titleTextView = holder.titleTextView
         val detailTextView = holder.detailTextView
+        val image = holder.image
 
         titleTextView.setText( dataSource.getJSONObject(position).getString("title").toString() )
         detailTextView.setText( dataSource.getJSONObject(position).getString("description").toString() )
+
+        Glide.with(thiscontext)
+            .load(dataSource.getJSONObject(position).getString("image").toString())
+            .into(image);
+
+        layout.setOnClickListener{
+            Toast.makeText(thiscontext,titleTextView.text.toString(), Toast.LENGTH_SHORT).show()
+        }
 
         return view
     }
 
     private class ViewHolder {
-
+        lateinit var layout : LinearLayout
         lateinit var titleTextView: TextView
         lateinit var detailTextView: TextView
-
+        lateinit var image: ImageView
     }
-
 
 }
