@@ -3,11 +3,14 @@ package com.example.listview
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import org.json.JSONObject
 
 /**
@@ -32,8 +35,18 @@ class fragment_list_view : Fragment() {
         val adapter = CustomAdapter(activity!!.baseContext, jsonArray)
         listView.adapter = adapter
 
-        listView.setOnClickListener( ){
+        listView.setOnItemClickListener { parent, view, position, id ->
+            var titleTextView = jsonArray.getJSONObject(position).getString("title").toString()
+            var detailTextView = jsonArray.getJSONObject(position).getString("description").toString()
+            var image = jsonArray.getJSONObject(position).getString("image").toString()
 
+            val fragmentListViewDetail = fragment_list_view_detail().newInstance(titleTextView,detailTextView,image)
+
+            val fm = fragmentManager
+            val transaction : FragmentTransaction = fm!!.beginTransaction()
+            transaction.replace(R.id.contentContainer, fragmentListViewDetail,"fragment_list_view_detail")
+            transaction.addToBackStack("fragment_list_view_detail")
+            transaction.commit()
         }
 
         return view

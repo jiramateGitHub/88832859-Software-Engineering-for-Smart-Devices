@@ -66,9 +66,9 @@ class CustomAdapter(context: Context, val dataSource: JSONArray) : BaseAdapter()
             .load(dataSource.getJSONObject(position).getString("image").toString())
             .into(image);
 
-        layout.setOnClickListener{
-            Toast.makeText(thiscontext,titleTextView.text.toString(), Toast.LENGTH_SHORT).show()
-        }
+//        layout.setOnClickListener{
+//            Toast.makeText(thiscontext,titleTextView.text.toString(), Toast.LENGTH_SHORT).show()
+//        }
 
         return view
     }
