@@ -16,6 +16,8 @@ import org.json.JSONObject
 class fragment_list_view : Fragment() {
 
     private lateinit var listView: ListView
+    private var username : String? = null
+    private var password : String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -29,6 +31,10 @@ class fragment_list_view : Fragment() {
 
         val adapter = CustomAdapter(activity!!.baseContext, jsonArray)
         listView.adapter = adapter
+
+        listView.setOnClickListener( ){
+
+        }
 
         return view
     }
@@ -49,6 +55,15 @@ class fragment_list_view : Fragment() {
         }
 
         return json
+    }
+
+    fun newInstance(username: String,password: String): fragment_list_view {
+        val fragment = fragment_list_view()
+        val bundle = Bundle()
+        bundle.putString("username", username)
+        bundle.putString("password", password)
+        fragment.setArguments(bundle)
+        return fragment
     }
 
 }

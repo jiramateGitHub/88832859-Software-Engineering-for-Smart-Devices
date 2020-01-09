@@ -9,12 +9,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragment_list_view = fragment_list_view()
+        val fragmentLogin = fragment_login()
         val manager = supportFragmentManager;
         val transaction = manager.beginTransaction();
-        transaction.replace(R.id.Layout, fragment_list_view,"fragment_list_view");
-        transaction.addToBackStack("fragment_list_view");
+        transaction.replace(R.id.contentContainer, fragmentLogin,"fragment_login");
+        transaction.addToBackStack("fragment_login");
         transaction.commit();
 
+    }
+
+    override fun onBackPressed() {
+        val manager = supportFragmentManager.findFragmentById(R.id.contentContainer)
+        if (manager is fragment_login ) {
+            finish()
+        } else {
+            super.onBackPressed();
+        }
     }
 }
