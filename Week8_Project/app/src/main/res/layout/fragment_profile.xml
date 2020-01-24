@@ -1,31 +1,120 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".profile.profile">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_profile"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true" />
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iv_profile"
-        android:layout_centerHorizontal="true"
-        android:text="Name"
-        android:textSize="18sp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
 
-    <Button
-        android:text="logout"
-        android:id="@+id/login_button2"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:adjustViewBounds="true"
+            android:background="#4267B2"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_profile"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FFFFFF"/>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_profile"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:text="Name"
+                android:textSize="21sp"
+                android:textColor="#fff"
+                />
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:layout_toRightOf="@+id/iv_profile"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="20dp"
+                android:text="email"
+                android:textSize="15sp"
+                android:textColor="#fff"
+                />
+
+            <Button
+                android:id="@+id/login_button2"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/tv_name"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="25dp"
+                android:layout_toRightOf="@+id/iv_profile"
+                android:background="@drawable/btn_logout"
+                android:text="logout"
+                android:textColor="#000"
+                android:textSize="14dp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/menu_layout"
+                android:layout_below="@+id/login_button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:text="Timeline"
+                    android:id="@+id/login_button3"
+                    android:layout_weight=".50"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/login_button2"
+                    android:textSize="13dp"
+                    android:textColor="#fff"
+                    android:background="@drawable/btnformate_2"/>
+<!--                <Button-->
+<!--                    android:text="Profile"-->
+<!--                    android:id="@+id/login_button4"-->
+<!--                    android:layout_weight=".50"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_below="@+id/login_button2"-->
+<!--                    android:layout_toRightOf="@+id/login_button3"-->
+<!--                    android:textSize="13dp"-->
+<!--                    android:textColor="#fff"-->
+<!--                    android:background="@drawable/btnformate_2"/>-->
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_marginTop="205dp">
 
-</LinearLayout>
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
+</FrameLayout>
+
+
+

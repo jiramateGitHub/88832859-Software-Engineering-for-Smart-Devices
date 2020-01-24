@@ -52,15 +52,18 @@ class login : Fragment() {
         signin = view.findViewById<Button>(R.id.signin)
 
         signin!!.setOnClickListener{
-            Toast.makeText(context,"Welcome " + username!!.text.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"Hello " + username!!.text.toString(), Toast.LENGTH_SHORT).show()
 //            val fragmentListView = profile().newInstance(username!!.text.toString(),password!!.text.toString())
-            val profile = profile()
+            var url_img = "https://previews.123rf.com/images/afe207/afe2071306/afe207130600098/20416813-male-profile-picture.jpg"
 
             val fm = fragmentManager
             val transaction : FragmentTransaction = fm!!.beginTransaction()
-            transaction.replace(R.id.contentContainer, profile,"profile")
-            transaction.addToBackStack("profile")
+
+            val fragment_profile = profile().newInstance(url_img,username!!.text.toString(),username!!.text.toString()+"@gmail.com")
+            transaction.replace(R.id.contentContainer, fragment_profile,"fragment_profile")
+            transaction.addToBackStack("fragment_profile")
             transaction.commit()
+
         }
 
         callbackManager = CallbackManager.Factory.create()
@@ -134,11 +137,11 @@ class login : Fragment() {
                 Log.d(ContentValues.TAG, "signInWithCredential:success")
                 user = firebaseAuth!!.currentUser
 
-                val profile = profile()
-                    .newInstance(user!!.photoUrl.toString(),user!!.displayName.toString())
+                val fragment_profile = profile()
+                    .newInstance(user!!.photoUrl.toString(),user!!.displayName.toString(),user!!.email.toString())
                 val fm = fragmentManager
                 val transaction : FragmentTransaction = fm!!.beginTransaction()
-                transaction.replace(R.id.contentContainer, profile,"fragment_profile")
+                transaction.replace(R.id.contentContainer, fragment_profile,"fragment_profile")
                 transaction.addToBackStack("fragment_profile")
                 transaction.commit()
             } else {
