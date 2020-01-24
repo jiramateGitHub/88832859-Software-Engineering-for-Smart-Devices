@@ -9,6 +9,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,9 +19,12 @@ import com.example.week8_project.login.login
 import com.example.week8_project.profile.detail
 import org.json.JSONArray
 
-class MyRecyclerAdapter(context: Context, val dataSource: JSONArray) : RecyclerView.Adapter<MyRecyclerAdapter.Holder>() {
+class MyRecyclerAdapter(fragmentActivity: FragmentActivity, val dataSource: JSONArray) : RecyclerView.Adapter<MyRecyclerAdapter.Holder>() {
 
-    private val thiscontext : Context = context
+//    private val thiscontext : Context = context
+    private val thiscontext : Context = fragmentActivity.baseContext
+    private val thisActivity = fragmentActivity
+
 
     class Holder(view : View) : RecyclerView.ViewHolder(view) {
         private val View = view;
@@ -68,11 +74,26 @@ class MyRecyclerAdapter(context: Context, val dataSource: JSONArray) : RecyclerV
             .load(dataSource.getJSONObject(position).getString("avatar").toString())
             .into(holder.avatar)
 
-//        holder.layout.setOnClickListener{
-//
-//            Toast.makeText(thiscontext,holder.nameTextView.text.toString(),Toast.LENGTH_SHORT).show()
-//
-//        }
+        holder.layout.setOnClickListener {
+
+            var nameTextView = dataSource.getJSONObject(position).getString("name").toString()
+            var titleTextView = dataSource.getJSONObject(position).getString("title").toString()
+            var detailTextView =
+                dataSource.getJSONObject(position).getString("description").toString()
+            var image = dataSource.getJSONObject(position).getString("image").toString()
+            var avatar = dataSource.getJSONObject(position).getString("avatar").toString()
+
+            val fragment_detail =
+                detail().newInstance(nameTextView, titleTextView, detailTextView, image, avatar)
+
+            val fm = thisActivity.supportFragmentManager
+            val transaction: FragmentTransaction = fm!!.beginTransaction()
+            transaction.replace(R.id.contentContainer, fragment_detail, "fragment_detail")
+            transaction.addToBackStack("fragment_detail")
+            transaction.commit()
+        }
+
+
 
     }
 

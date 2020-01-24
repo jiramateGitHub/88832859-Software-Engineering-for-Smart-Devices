@@ -65,35 +65,35 @@ class profile : Fragment() {
         val jsonArray = json.getJSONArray("recipes")
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        listView = view.findViewById(R.id.listview)
-        val adapter =  CustomAdapter(activity!!.baseContext, jsonArray)
-        listView.adapter = adapter
-
-        listView.setOnItemClickListener { parent, view, position, id ->
-            var nameTextView = jsonArray.getJSONObject(position).getString("name").toString()
-            var titleTextView = jsonArray.getJSONObject(position).getString("title").toString()
-            var detailTextView = jsonArray.getJSONObject(position).getString("description").toString()
-            var image = jsonArray.getJSONObject(position).getString("image").toString()
-            var avatar = jsonArray.getJSONObject(position).getString("avatar").toString()
-
-            val fragment_detail = detail().newInstance(nameTextView,titleTextView,detailTextView,image,avatar)
-
-            val fm = fragmentManager
-            val transaction : FragmentTransaction = fm!!.beginTransaction()
-            transaction.replace(R.id.contentContainer, fragment_detail,"fragment_detail")
-            transaction.addToBackStack("fragment_detail")
-            transaction.commit()
-        }
+//        listView = view.findViewById(R.id.listview)
+//        val adapter =  CustomAdapter(activity!!.baseContext, jsonArray)
+//        listView.adapter = adapter
+//
+//        listView.setOnItemClickListener { parent, view, position, id ->
+//            var nameTextView = jsonArray.getJSONObject(position).getString("name").toString()
+//            var titleTextView = jsonArray.getJSONObject(position).getString("title").toString()
+//            var detailTextView = jsonArray.getJSONObject(position).getString("description").toString()
+//            var image = jsonArray.getJSONObject(position).getString("image").toString()
+//            var avatar = jsonArray.getJSONObject(position).getString("avatar").toString()
+//
+//            val fragment_detail = detail().newInstance(nameTextView,titleTextView,detailTextView,image,avatar)
+//
+//            val fm = fragmentManager
+//            val transaction : FragmentTransaction = fm!!.beginTransaction()
+//            transaction.replace(R.id.contentContainer, fragment_detail,"fragment_detail")
+//            transaction.addToBackStack("fragment_detail")
+//            transaction.commit()
+//        }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//        recyclerView = view.findViewById(R.id.recyLayout)
-//        //ตั้งค่า Layout
-//        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity!!.baseContext)
-//        recyclerView.layoutManager = layoutManager
-//
-//        //ตั้งค่า Adapter
-//        val adapter = MyRecyclerAdapter(activity!!.baseContext,jsonArray)
-//        recyclerView.adapter = adapter
+        recyclerView = view.findViewById(R.id.recyLayout)
+        //ตั้งค่า Layout
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity!!.baseContext)
+        recyclerView.layoutManager = layoutManager
+
+        //ตั้งค่า Adapter
+        val adapter = MyRecyclerAdapter(activity!!,jsonArray)
+        recyclerView.adapter = adapter
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         btn_logout.setOnClickListener{
